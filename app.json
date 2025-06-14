@@ -34,11 +34,6 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
-        },
-        "react-native-maps",
-        {
-          "iosGoogleMapsApiKey": "YOUR_KEY_HERE",
-          "androidGoogleMapsApiKey": "YOUR_KEY_HERE"
         }
       ]
     ],
