@@ -8,7 +8,7 @@ import React, { useEffect } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 const Home = () => {
-  const { isPending, error, data } = useQuery({
+  const { isPending, error, data, refetch } = useQuery({
     queryKey: ["propertyData"],
     queryFn: fetchPropertiesList,
   });
@@ -27,7 +27,12 @@ const Home = () => {
   };
 
   return (
-    <BaseView title="Home" isLoading={isPending} error={error?.message}>
+    <BaseView
+      title="Home"
+      isLoading={isPending}
+      error={error?.message}
+      onRetry={refetch}
+    >
       <View style={styles.container}>
         <FlatList
           data={properties || []}

@@ -8,7 +8,7 @@ import React, { useEffect } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 const Bookings = () => {
-  const { isPending, error, data } = useQuery({
+  const { isPending, error, data, refetch } = useQuery({
     queryKey: ["bookingData"],
     queryFn: fetchBookingsList,
   });
@@ -27,7 +27,12 @@ const Bookings = () => {
   };
 
   return (
-    <BaseView title="Bookings" isLoading={isPending} error={error?.message}>
+    <BaseView
+      title="Bookings"
+      isLoading={isPending}
+      error={error?.message}
+      onRetry={refetch}
+    >
       <View style={styles.container}>
         <FlatList
           data={bookings || []}

@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import Header from "../components/Header";
@@ -19,6 +20,7 @@ type Props = {
   renderLoader?: () => React.ReactNode;
   renderError?: (error: string) => React.ReactNode;
   useScroll?: boolean;
+  onRetry?: () => void;
 };
 
 const BaseView: React.FC<Props> = ({
@@ -31,6 +33,7 @@ const BaseView: React.FC<Props> = ({
   renderLoader,
   renderError,
   useScroll = false,
+  onRetry,
 }) => {
   const renderContent = () => {
     if (isLoading) {
@@ -50,6 +53,11 @@ const BaseView: React.FC<Props> = ({
       ) : (
         <View style={styles.center}>
           <Text style={[styles.statusText, styles.errorText]}>{error}</Text>
+          {onRetry && (
+            <TouchableOpacity style={styles.retryButton} onPress={onRetry}>
+              <Text style={styles.retryText}>Try Again</Text>
+            </TouchableOpacity>
+          )}
         </View>
       );
     }
@@ -88,8 +96,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 12,
     color: "#444",
+    textAlign: "center",
   },
   errorText: {
     color: "red",
+  },
+  retryButton: {
+    marginTop: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: "#8E8E93",
+    borderRadius: 4,
+  },
+  retryText: {
+    color: "white",
+    fontSize: 16,
   },
 });

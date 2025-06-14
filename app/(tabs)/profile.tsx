@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const Profile = () => {
-  const { isPending, error, data } = useQuery({
+  const { isPending, error, data, refetch } = useQuery({
     queryKey: ["profileData"],
     queryFn: fetchProfile,
   });
@@ -22,7 +22,7 @@ const Profile = () => {
   }, [data, setUserProfile]);
 
   return (
-    <BaseView isLoading={isPending} error={error?.message}>
+    <BaseView isLoading={isPending} error={error?.message} onRetry={refetch}>
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.avatarContainer}>

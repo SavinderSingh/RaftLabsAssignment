@@ -42,9 +42,7 @@ export const fetchProfile = async () => {
 
     return response.data;
   } catch (error: any) {
-    console.error("Error fetching property listings:", error?.message || error);
-    throw new Error(
-      "Something went wrong while fetching the property listings."
-    );
+    console.error("Error fetching profile:", error?.message || error);
+    throw new Error("Something went wrong while fetching the profile.");
   }
 };
