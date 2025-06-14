@@ -2,6 +2,16 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+## API Server
+
+To run the mock API server:
+
+```bash
+json-server --watch db.json --port 3001
+```
+
+This will serve the API endpoints from `http://localhost:3001`
+
 ## Get started
 
 1. Install dependencies
