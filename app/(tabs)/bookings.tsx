@@ -1,23 +1,23 @@
-import { PropertyInterface } from "@/src/models/PropertyModel";
-import { fetchPropertiesList } from "@/src/networkRequests/Api";
+import { BookingInterface } from "@/src/models/BookingModel";
+import { fetchBookingsList } from "@/src/networkRequests/Api";
 import BaseView from "@/src/views/hoc/BaseView";
-import PropertyItem from "@/src/views/items/PropertyItem";
+import BookingItem from "@/src/views/items/BookingItem";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
-const Home = () => {
+const Bookings = () => {
   const { isPending, error, data } = useQuery({
-    queryKey: ["propertyData"],
-    queryFn: fetchPropertiesList,
+    queryKey: ["bookingData"],
+    queryFn: fetchBookingsList,
   });
 
-  const renderItem = ({ item }: { item: PropertyInterface }) => {
-    return <PropertyItem key={item?.id} item={item} />;
+  const renderItem = ({ item }: { item: BookingInterface }) => {
+    return <BookingItem key={item?.id} item={item} />;
   };
 
   return (
-    <BaseView title="Home" isLoading={isPending} error={error?.message}>
+    <BaseView title="Bookings" isLoading={isPending} error={error?.message}>
       <View style={styles.container}>
         <FlatList
           data={data || []}
@@ -29,7 +29,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Bookings;
 
 const styles = StyleSheet.create({
   container: {

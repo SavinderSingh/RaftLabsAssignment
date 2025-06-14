@@ -1,0 +1,105 @@
+{
+  "properties": [
+    {
+      "id": "1",
+      "title": "Modern Downtown Apartment",
+      "price": 2500,
+      "location": {
+        "address": "123 Main St",
+        "city": "San Francisco",
+        "state": "CA",
+        "coordinates": {
+          "latitude": 37.7749,
+          "longitude": -122.4194
+        }
+      },
+      "features": ["2 Bedrooms", "2 Bathrooms", "Parking", "Pool"],
+      "images": [
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+        "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Luxury Beach House",
+      "price": 5000,
+      "location": {
+        "address": "456 Ocean Ave",
+        "city": "Malibu",
+        "state": "CA",
+        "coordinates": {
+          "latitude": 34.0259,
+          "longitude": -118.7798
+        }
+      },
+      "features": ["4 Bedrooms", "3 Bathrooms", "Beachfront", "Private Pool"],
+      "images": [
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
+        "https://images.unsplash.com/photo-1613490493576-7fde63acd811"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Cozy Mountain Cabin",
+      "price": 1800,
+      "location": {
+        "address": "789 Pine Rd",
+        "city": "Aspen",
+        "state": "CO",
+        "coordinates": {
+          "latitude": 39.1911,
+          "longitude": -106.8175
+        }
+      },
+      "features": ["3 Bedrooms", "2 Bathrooms", "Fireplace", "Mountain View"],
+      "images": [
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+        "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Urban Loft",
+      "price": 3200,
+      "location": {
+        "address": "101 Brick Lane",
+        "city": "New York",
+        "state": "NY",
+        "coordinates": {
+          "latitude": 40.7128,
+          "longitude": -74.006
+        }
+      },
+      "features": ["Open Floor Plan", "High Ceilings", "City View", "Gym"],
+      "images": [
+        "https://images.unsplash.com/photo-1493809842364-78817add7ffb",
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688"
+      ]
+    }
+  ],
+  "bookings": [
+    {
+      "id": "1",
+      "propertyId": "1",
+      "userId": "user1",
+      "checkIn": "2024-02-01",
+      "checkOut": "2024-02-05",
+      "status": "confirmed"
+    },
+    {
+      "id": "2",
+      "propertyId": "3",
+      "userId": "user2",
+      "checkIn": "2024-03-15",
+      "checkOut": "2024-03-20",
+      "status": "pending"
+    }
+  ],
+  "profiles": {
+    "id": "user1",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "bookings": ["1"]
+  }
+}
