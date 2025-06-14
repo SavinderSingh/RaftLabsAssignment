@@ -1,9 +1,10 @@
 import { fetchProfile } from "@/src/networkRequests/Api";
+import { Actions, State, useStore } from "@/src/store/store";
 import BaseView from "@/src/views/hoc/BaseView";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { ActivityIndicator, Image, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 const Profile = () => {
   const { isPending, error, data } = useQuery({
@@ -11,40 +12,29 @@ const Profile = () => {
     queryFn: fetchProfile,
   });
 
-  if (isPending) {
-    return (
-      <BaseView>
-        <ActivityIndicator size="large" color="#007AFF" />
-      </BaseView>
-    );
-  }
+  const { setUserProfile } = useStore<Actions>((state) => state);
+  const { user } = useStore<State>((state) => state);
 
-  if (error) {
-    return (
-      <BaseView>
-        <Text>Error loading profile</Text>
-      </BaseView>
-    );
-  }
+  useEffect(() => {
+    if (data) {
+      setUserProfile(data);
+    }
+  }, [data, setUserProfile]);
 
   return (
-    <BaseView>
+    <BaseView isLoading={isPending} error={error?.message}>
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.avatarContainer}>
-            {data?.photo ? (
-              <Image source={{ uri: data.photo }} style={styles.avatar} />
-            ) : (
-              <MaterialCommunityIcons
-                name="account-circle"
-                size={80}
-                color="#007AFF"
-              />
-            )}
+            <MaterialCommunityIcons
+              name="account-circle"
+              size={80}
+              color="#007AFF"
+            />
           </View>
 
-          <Text style={styles.name}>{data?.name || "User"}</Text>
-          <Text style={styles.email}>{data?.email}</Text>
+          <Text style={styles.name}>{user?.name || "User"}</Text>
+          <Text style={styles.email}>{user?.email}</Text>
         </View>
 
         <View style={styles.statsContainer}>
@@ -54,7 +44,7 @@ const Profile = () => {
               size={24}
               color="#007AFF"
             />
-            <Text style={styles.statValue}>{data?.bookings?.length || 0}</Text>
+            <Text style={styles.statValue}>{user?.bookings?.length || 0}</Text>
             <Text style={styles.statLabel}>Bookings</Text>
           </View>
         </View>
@@ -63,11 +53,11 @@ const Profile = () => {
           <Text style={styles.sectionTitle}>Account Details</Text>
           <View style={styles.detailItem}>
             <MaterialCommunityIcons name="account" size={20} color="#666" />
-            <Text style={styles.detailText}>{data?.name}</Text>
+            <Text style={styles.detailText}>{user?.name}</Text>
           </View>
           <View style={styles.detailItem}>
             <MaterialCommunityIcons name="email" size={20} color="#666" />
-            <Text style={styles.detailText}>{data?.email}</Text>
+            <Text style={styles.detailText}>{user?.email}</Text>
           </View>
         </View>
       </View>

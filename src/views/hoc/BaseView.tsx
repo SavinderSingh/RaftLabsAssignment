@@ -54,16 +54,6 @@ const BaseView: React.FC<Props> = ({
       );
     }
 
-    // if (!data || (Array.isArray(data) && data.length === 0)) {
-    //   return renderEmpty ? (
-    //     renderEmpty()
-    //   ) : (
-    //     <View style={styles.center}>
-    //       <Text style={styles.statusText}>No data available.</Text>
-    //     </View>
-    //   );
-    // }
-
     return useScroll ? <ScrollView>{children}</ScrollView> : <>{children}</>;
   };
 

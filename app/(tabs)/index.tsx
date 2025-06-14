@@ -1,9 +1,10 @@
 import { PropertyInterface } from "@/src/models/PropertyModel";
 import { fetchPropertiesList } from "@/src/networkRequests/Api";
+import { Actions, State, useStore } from "@/src/store/store";
 import BaseView from "@/src/views/hoc/BaseView";
 import PropertyItem from "@/src/views/items/PropertyItem";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 const Home = () => {
@@ -11,6 +12,15 @@ const Home = () => {
     queryKey: ["propertyData"],
     queryFn: fetchPropertiesList,
   });
+
+  const { setProperties } = useStore<Actions>((state) => state);
+  const { properties } = useStore<State>((state) => state);
+
+  useEffect(() => {
+    if (data) {
+      setProperties(data);
+    }
+  }, [data, setProperties]);
 
   const renderItem = ({ item }: { item: PropertyInterface }) => {
     return <PropertyItem key={item?.id} item={item} />;
@@ -20,9 +30,11 @@ const Home = () => {
     <BaseView title="Home" isLoading={isPending} error={error?.message}>
       <View style={styles.container}>
         <FlatList
-          data={data || []}
+          data={properties || []}
           renderItem={renderItem}
-          keyExtractor={(item) => item?.id}
+          keyExtractor={(item) => item.id}
+          extraData={false}
+          ListEmptyComponent={<View />}
         />
       </View>
     </BaseView>
